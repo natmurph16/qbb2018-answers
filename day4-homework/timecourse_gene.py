@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 """
-Usage: ./timecourse_replicates.py <t_name> <samples.csv> <ctab_dir>
+Usage: ./timecourse_gene.py <gene_name> <samples.csv> <ctab_dir>
 
-Create a timecourse of a given transcript (FBtr0331261) for males and females
+Create a timecourse of a mean transcript levels for a given gene
 Output one plot with both timecourses and their functions
 """
 
