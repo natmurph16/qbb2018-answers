@@ -4,7 +4,6 @@
 Usage: ./timecourse_gene.py <gene_name> <samples.csv> <ctab_dir>
 
 Create a timecourse of a mean transcript levels for a given gene
-Output one plot with both timecourses and their functions
 """
 
 import sys
