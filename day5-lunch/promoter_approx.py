@@ -15,21 +15,6 @@ Outputs a tab separated .bed file
 import sys
 import pandas as pd
 
-# df = pd.read_csv(sys.argv[1], sep = "\t")
-#
-# p_start = df.loc[:,"start"] - 500
-# p_end = df.loc[:,"start"] + 500
-#
-# df2 = df.assign(p_start = p_start, p_end = p_end)
-# # if df2.loc[:,"p_start"] <= 0:
-# #     df2.loc[:,"p_start"] = 1
-#
-# #coi  = columns of interest
-# coi = ["chr", "p_start", "p_end", "t_name"]
-# df2.loc[:,coi].to_csv(sys.stdout, sep = "\t", index = False)
-
-
-
 ctab_file = open(sys.argv[1])
 
 for i, line in enumerate(ctab_file):
