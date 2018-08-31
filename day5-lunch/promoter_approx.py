@@ -36,10 +36,18 @@ for i, line in enumerate(ctab_file):
     if i == 0:
         continue
     fields = line.rstrip("\r\n").split("\t")
-    p_start = int(fields[3]) - 500
-    if p_start <= 0:
-        p_start = 1
-    p_end = int(fields[4]) + 500
+    if fields[2] == "+":
+        p_start = int(fields[3]) - 500
+        if p_start <= 0:
+            p_start = 1
+        p_end = int(fields[4]) + 500
+    elif fields[2] == "-":
+        p_start = int(fields[4]) - 500
+        if p_start <= 0:
+            p_start = 1
+        p_end = int(fields[3]) + 500
+    
+    
     bed_order = [fields[1], str(p_start), str(p_end), fields[5]]
 
     print("\t".join(bed_order))
