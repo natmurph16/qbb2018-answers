@@ -25,12 +25,12 @@ coi = ["FPKM"]
 fpkm_df = df.loc[:,coi]
 
 df_final = pd.concat([fpkm_df, df2, df3, df4, df5, df6], axis = 1, ignore_index = True, sort = True)
-df_final.rename(index = str, columns = {0 : "FPKMs", 1 : "tab1", 2 : "tab2", 3 : "tab3", 4 : "tab4", 5 : "tab5"}, inplace = True)
+df_final.rename(index = str, columns = {0 : "FPKMs", 1 : "H3K27ac", 2 : "H3K27me3", 3 : "H3K4me1", 4 : "H3K4me3", 5 : "H3K9ac"}, inplace = True)
 
 #print(fpkm_df)
 #print(df_final)
 
-mod = sm.ols(formula = "FPKMs ~ tab1 + tab2 + tab3 + tab4 + tab5", data = df_final)
+mod = sm.ols(formula = "FPKMs ~ H3K27ac + H3K27me3 + H3K4me1 + H3K4me3 + H3K9ac", data = df_final)
 res = mod.fit()
 #print(res.summary())
 #print(res.resid)

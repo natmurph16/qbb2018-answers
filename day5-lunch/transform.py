@@ -27,19 +27,19 @@ fpkm_df = df.loc[:,coi]
 fpkm_log = np.log(fpkm_df + 1)
 
 df_final = pd.concat([fpkm_log, df2, df3, df4, df5, df6], axis = 1, ignore_index = True, sort = True)
-df_final.rename(index = str, columns = {0 : "FPKM_log", 1 : "tab1", 2 : "tab2", 3 : "tab3", 4 : "tab4", 5 : "tab5"}, inplace = True)
+df_final.rename(index = str, columns = {0 : "FPKM_log", 1 : "H3K27ac", 2 : "H3K27me3", 3 : "H3K4me1", 4 : "H3K4me3", 5 : "H3K9ac"}, inplace = True)
 
 #print(fpkm_df)
 #print(df_final)
 
-log_mod = sm.ols(formula = "FPKM_log ~ tab1 + tab2 + tab3 + tab4 + tab5", data = df_final)
+log_mod = sm.ols(formula = "FPKM_log ~ H3K27ac + H3K27me3 + H3K4me1 + H3K4me3 + H3K9ac", data = df_final)
 log_res = log_mod.fit()
 #print(log_res.summary())
 #print(log_res.resid)
 
 fig, ax = plt.subplots()
 plt.hist(log_res.resid, bins = 100)
-ax.set_title("Histogram of Residuals")
+ax.set_title("Histogram of Log Residuals")
 ax.set_xlabel("Bins")
 ax.set_ylabel("Number of Transcripts per Residual")
 ax.set_xlim(-50, 50)
