@@ -1,0 +1,50 @@
+# velveth time, low reads: 0.5 sec
+# velvetg time, low reads: 0.04 sec
+#
+# time velveth ~/qbb2018-answers/week2/velvet 31 -fastq -shortPaired reads_low_1.fastq reads_low_2.fastq
+# time velvetg ~/qbb2018-asnwers/week2/velvet
+# output: contigs.fa
+#
+# velveth time, long reads: 0.5 sec
+# velvetg time, long reads: 0.04 sec
+#
+# time velveth ~/qbb2018-answers/week2/velvet_long 31 -fastq -shortPaired reads_1.fastq reads_2.fastq
+# time velvetg ~/qbb2018-asnwers/week2/velvet_long
+# output: contigs.fa
+#
+# spades time, low reads: 1.1 sec
+#
+# time spades.py --only-assembler -o ~/qbb2018-answers/week2/spades -1 reads_low_1.fastq -2 reads_low_2.fastq
+# output: contigs.fasta
+#
+# spades time, nano reads: 5.5 sec
+#
+# time spades.py --only-assembler -o ~/qbb2018-answers/week2/spades_nano -1 reads_low_1.fastq -2 reads_low_2.fastq --nanopore MAP006.subset.fa
+# output: contigs.fasta
+#
+# spades time, long reads: 29 sec
+#
+# time spades.py --only-assembler -o ~/qbb2018-answers/week2/spades_long -1 reads_1.fastq -2 reads_2.fastq
+# output: contigs.fasta
+#
+# lastz reference.fasta ~/qbb2018-answers/week2/velvet/contigs.fa --format=general:zstart1,size2,end1,name2 --chain --output=velvet_dotplot.out
+#
+# sort -k 1 -n velvet_dotplot.out > velvet_dotplot_sorted.out
+#
+# lastz reference.fasta ~/qbb2018-answers/week2/spades/contigs.fasta --format=general:zstart1,size2,end1,name2 --chain --output=spades_dotplot.out
+#
+# sort -k 1 -n spades_dotplot.out > spades_dotplot_sorted.out
+#
+#
+# lastz reference.fasta ~/qbb2018-answers/week2/spades_nano/contigs.fasta --format=general:zstart1,size2,end1,name2 --chain --output=spades_nano_dotplot.out
+#
+# sort -k 1 -n spades_nano_dotplot.out > spades_nano_dotplot_sorted.out
+#
+#
+# lastz reference.fasta ~/qbb2018-answers/week2/velvet_long/contigs.fa --format=general:zstart1,size2,end1,name2 --chain --output=velvet_long_dotplot.out
+#
+# sort -k 1 -n velvet_long_dotplot.out > velvet_long_dotplot_sorted.out
+#
+# lastz reference.fasta ~/qbb2018-answers/week2/spades_long/contigs.fasta --format=general:zstart1,size2,end1,name2 --chain --output=spades_long_dotplot.out
+#
+# sort -k 1 -n spades_long_dotplot.out > spades_long_dotplot_sorted.out

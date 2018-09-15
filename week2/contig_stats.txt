@@ -1,0 +1,28 @@
+# Velvet low reads
+# Min contig length:187.76897689768978
+# Max contig length:998
+# Avg contig length:61
+# n50:243
+#
+# Spades low reads
+# Min contig length:389.2109375
+# Max contig length:1737
+# Avg contig length:207
+# n50:372
+#
+# Spades with Nanopore
+# Min contig length:2810.1428571428573
+# Max contig length:26583
+# Avg contig length:207
+# n50:17841
+#
+# Velvet long reads
+# Min contig length:9096.454545454546
+# Max contig length:33235
+# Avg contig length:61
+# n50:14548
+#
+# Spades long reads
+# Min contig length:100000.0
+# Max contig length:100000
+# Avg contig length:100000
