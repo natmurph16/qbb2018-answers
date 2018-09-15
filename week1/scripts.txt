@@ -1,0 +1,7 @@
+blastn -db nr -query ~/qbb2018-answers/week1/week1_query.fa -outfmt "6 qseqid sseqid sseq" -out results3.fa -max_target_seqs 1000 -evalue 0.0001 -remote
+
+transeq -sequence results3.fa out.fa
+
+mafft output: = maft_out.fa
+
+./blast_align.py results3.fa mafft_out.fa
