@@ -1,0 +1,58 @@
+# conda install bwa freebayes vcflib vcftools snpeff
+#
+# conda install -c bioconda ucsc-twobittofa
+#
+# twoBitToFa sacCer3.2bit RefGen.fa
+#
+# tar xvf BYxRM_subset.tar.xv
+#
+#
+# bwa index -a is RefGen.fa
+#
+# bwa mem -R '@RG\tID:A01_09\tSM:A01_09' RefGen.fa A01_09.fastq > A01_09.sam
+#
+# bwa mem -R '@RG\tID:A01_11\tSM:A01_11' RefGen.fa A01_09.fastq > A01_11.sam
+#
+# bwa mem -R '@RG\tID:A01_23\tSM:A01_23' RefGen.fa A01_09.fastq > A01_23.sam
+#
+# bwa mem -R '@RG\tID:A01_24\tSM:A01_24' RefGen.fa A01_09.fastq > A01_24.sam
+#
+# bwa mem -R '@RG\tID:A01_27\tSM:A01_27' RefGen.fa A01_09.fastq > A01_27.sam
+#
+# bwa mem -R '@RG\tID:A01_31\tSM:A01_31' RefGen.fa A01_09.fastq > A01_31.sam
+#
+# bwa mem -R '@RG\tID:A01_35\tSM:A01_35' RefGen.fa A01_09.fastq > A01_35.sam
+#
+# bwa mem -R '@RG\tID:A01_39\tSM:A01_39' RefGen.fa A01_09.fastq > A01_39.sam
+#
+# bwa mem -R '@RG\tID:A01_62\tSM:A01_62' RefGen.fa A01_09.fastq > A01_62.sam
+#
+# bwa mem -R '@RG\tID:A01_63\tSM:A01_63' RefGen.fa A01_09.fastq > A01_63.sam
+#
+# samtools view -S -b A01_09.sam > A01_09.bam
+# samtools view -S -b A01_11.sam > A01_11.bam
+# samtools view -S -b A01_23.sam > A01_23.bam
+# samtools view -S -b A01_24.sam > A01_24.bam
+# samtools view -S -b A01_27.sam > A01_27.bam
+# samtools view -S -b A01_31.sam > A01_31.bam
+# samtools view -S -b A01_35.sam > A01_35.bam
+# samtools view -S -b A01_39.sam > A01_39.bam
+# samtools view -S -b A01_62.sam > A01_62.bam
+# samtools view -S -b A01_63.sam > A01_63.bam
+#
+# samtools sort A01_09.sam -o A01_09_sorted.bam
+# samtools sort A01_11.sam -o A01_11_sorted.bam
+# samtools sort A01_23.sam -o A01_23_sorted.bam
+# samtools sort A01_24.sam -o A01_24_sorted.bam
+# samtools sort A01_27.sam -o A01_27_sorted.bam
+# samtools sort A01_31.sam -o A01_31_sorted.bam
+# samtools sort A01_35.sam -o A01_35_sorted.bam
+# samtools sort A01_39.sam -o A01_39_sorted.bam
+# samtools sort A01_62.sam -o A01_62_sorted.bam
+# samtools sort A01_63.sam -o A01_63_sorted.bam
+#
+# freebayes -f RefGen.fa *sorted.bam --genotype-qualities | vcfallelicprimitives -kg >calls.vcf
+#
+# vcffilter calls.vcf -f "QUAL > 20" > results.vcf
+#
+# snpEff -v R64-1-1.86 results.vcf > annotated.vcf
