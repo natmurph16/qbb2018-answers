@@ -1,0 +1,45 @@
+gunzip g1e.tar.xz
+
+conda create -n macs2 macs2
+
+source activate macs2
+
+gunzip chr19.fa.gz
+
+bowtie2-build chr19.fa chr19_index
+
+bowtie2 -x chr19_index -U CTCF_ER4.fastq -S CTCF_ER4.sam
+
+bowtie2 -x chr19_index -U CTCF_G1E.fastq -S CTCF_G1E.sam
+
+bowtie2 -x chr19_index -U input_ER4.fastq -S input_ER4.sam
+
+bowtie2 -x chr19_index -U input_G1E.fastq -S input_G1E.sam
+
+macs2 callpeak -t CTCF_ER4.sam -c input_ER4.sam -n ER4_peakcall -f AUTO -g 1.87e9
+
+macs2 callpeak -t CTCF_G1E.sam -c input_G1E.sam -n G1E_peakcall -f AUTO -g 1.87e9
+
+bedtools sort -i ER4_peakcall_peaks.narrowPeak > ER4_sorted.bed
+
+bedtools sort -i G1E_peakcall_peaks.narrowPeak > G1E_sorted.bed
+
+bedtools intersect -a G1E_sorted.bed -b ER4_sorted.bed -v > lost_peaks.bed
+
+bedtools intersect -a ER4_sorted.bed qb G1E_sorted.bed -v > gained_peaks.bed
+
+bedtools sort -i Mus_musculus.GRCm38.94_features.bed > features_sorted.bed
+
+bedtools intersect -a ER4_sorted.bed -b features_exons.bed -v > ER4_exons.bed
+
+bedtools intersect -a ER4_sorted.bed -b features_introns.bed -v > ER4_introns.bed
+
+bedtools intersect -a ER4_sorted.bed -b features_promoters.bed -v > ER4_promoters.bed
+
+bedtools intersect -a G1E_sorted.bed -b features_exons.bed -v > G1E_exons.bed
+
+bedtools intersect -a G1E_sorted.bed -b features_introns.bed -v > G1E_introns.bed
+
+bedtools intersect -a G1E_sorted.bed -b features_promoters.bed -v > G1E_promoters.bed
+
+./plot.py gained_peaks.bed lost_peaks.bed ER4_exons.bed ER4_introns.bed ER4_promoters.bed G1E_exons.bed G1E_introns.bed G1E_promoters.bed
