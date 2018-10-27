@@ -1,0 +1,11 @@
+wget "https://raw.githubusercontent.com/bxlab/qbb2018/master/data/ER4_peaks.narrowPeak"
+
+bedtools getfasta -fi chr19.fa -bed ER4_peaks.narrowPeak_sorted -fo narrowPeak_seq
+
+meme-chip -db HOCOMOCOv11_full_MOUSE_mono_meme_format.meme narrowPeak_seq -norand
+
+meme-chip -db JASPAR_CORE_2016.meme narrowPeak_seq -norand -meme-maxw 20
+
+bedtools intersect -a fimo.gff -b ER4_peaks.narrowPeak_sorted > motif_overlap.bed
+
+./plots.py meme_parsed.txt
