@@ -1,0 +1,11 @@
+conda create -n hifive python=2.7
+source activate hifive
+conda install -y -c bioconda hifive
+
+hifive hic-complete express -d -f 25 -n 50 -i 0 -M example.mat.raw -P normalizing -B example.bed
+
+hifive hic-heatmap -t -b 500000 -d fend -F npz -i heatmap.png normalizing.hcp data.npz
+
+hifive hic-interval -c chr17 -s 15000000 -e 17500000 -d fend normalizing.hcp interval -i heatmap_interval.png
+
+./ctcf.py GSM2418860_WT_CTCF_peaks.txt
